@@ -1,0 +1,18 @@
+{
+  "name": "with-modules-and-rollup",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1" , 
+	"es6-to-es5" : "babel src -d dist/build-es5" , 
+	"es6bundle-to-es5" : "babel dist/build-es2015 -d dist/build-es5",
+	"build" : "rollup --config rollup.config.js && babel dist/build-es2015 -d dist/build-es5"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0"
+  }
+}

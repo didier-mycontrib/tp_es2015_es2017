@@ -1,0 +1,40 @@
+const webpack = require("webpack");
+const path = require("path");
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+
+//entry: "./src/index.js" ou entry: "./src/main.js" ou ...
+let config = {
+  mode: 'production',
+  entry: "./src/main.js",
+  output: {
+    path: path.resolve(__dirname, "./dist"),
+    filename: "./main-bundle.js"
+  },
+    module: {
+        rules: [{
+            test: /\.js/,
+            exclude: /(node_modules|bower_components)/,
+            use: [{
+                loader: 'babel-loader',
+				options: {
+				  presets: ['@babel/preset-env']
+				}
+            }]
+        },
+		{
+			test: /\.css$/,
+			use: ExtractTextPlugin.extract(
+			  {
+				fallback: 'style-loader',
+				use: ['css-loader']
+			  })
+		} 
+		]
+	  
+    },
+      plugins: [
+        new ExtractTextPlugin("styles-bundle.css")
+      ]
+}
+
+module.exports = config;
